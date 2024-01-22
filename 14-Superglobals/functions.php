@@ -6,3 +6,7 @@ function dumpDie($value){
   echo '</pre>';
   die();
 }
+
+function urlIs($url){
+  return $_SERVER['REQUEST_URI'] == $url;
+}
