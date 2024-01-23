@@ -16,3 +16,12 @@ function abort($code = 404){
   require "views/{$code}.php"; 
   die();
 }
+
+function routeToControllers($uri,$routes){
+  if(array_key_exists($uri,$routes)){
+    require $routes[$uri];
+  }
+  else {
+   abort();
+  }
+}

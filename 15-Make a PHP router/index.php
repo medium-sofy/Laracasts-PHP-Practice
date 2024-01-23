@@ -12,9 +12,4 @@ $routes = [
   '/contact' => 'controllers/contact.php'
 ];
 
-if(array_key_exists($uri,$routes)){
-  require $routes[$uri];
-}
-else {
- abort();
-}
+routeToControllers($uri,$routes);
