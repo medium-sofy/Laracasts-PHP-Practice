@@ -4,12 +4,16 @@ require 'functions.php';
 
 class Database {
 
-  public function query($query){
+  public $connection;
 
+  public function __construct(){
     $dsn = 'mysql:host=localhost;port=3306;user=root;password=root;dbname=myapp;';
-    $pdo = new PDO($dsn);
+    $this->connection = new PDO($dsn);
+  }
 
-    $statement = $pdo->prepare($query);
+  public function query($query){   
+
+    $statement = $this->connection->prepare($query);
 
     $statement-> execute();
 
