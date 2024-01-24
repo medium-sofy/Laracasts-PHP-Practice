@@ -2,14 +2,24 @@
 require 'functions.php';
 //require 'router.php';
 
-$dsn = 'mysql:host=localhost;port=3306;user=root;password=root;dbname=myapp;';
-$pdo = new PDO($dsn);
+class Database {
 
-$statement = $pdo->prepare('select * from posts');
+  public function query($query){
 
-$statement-> execute();
+    $dsn = 'mysql:host=localhost;port=3306;user=root;password=root;dbname=myapp;';
+    $pdo = new PDO($dsn);
 
-$posts = $statement -> fetchall(PDO::FETCH_ASSOC);
+    $statement = $pdo->prepare($query);
+
+    $statement-> execute();
+
+    return $statement -> fetchall(PDO::FETCH_ASSOC);
+
+  }
+}
+
+$db = new Database();
+$posts = $db->query('select * from posts');
 
 foreach($posts as $post){
   echo '<li>'.$post['title'].'</li>';
