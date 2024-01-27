@@ -6,9 +6,13 @@ $config = require('config.php');
 
 $db = new Database($config['Database']);
 
-$posts = $db->query('select * from posts') -> fetchall();
+$id =$_GET['id'];
+
+$posts = $db->query("select * from posts where id = ?", [$id]) -> fetch();
+
+dumpDie($posts);
 
 // Display posts and body content
-foreach($posts as $post){
-  echo '<li>'.$post['title'].': '. $post['body'].'</li>';
-}
+// foreach($posts as $post){
+//   echo '<li>'.$post['title'].': '. $post['body'].'</li>';
+// }
