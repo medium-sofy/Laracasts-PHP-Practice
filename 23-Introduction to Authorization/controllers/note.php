@@ -12,7 +12,7 @@ $note = $db -> query('SELECT * FROM notes WHERE id= :id', ['id' => $_GET['id'],]
   }
 
   if($note['user_id'] !== 9){
-    abort(403);
+    abort(Response::FORBIDDEN);
   }
 
 require 'views/note.view.php';
