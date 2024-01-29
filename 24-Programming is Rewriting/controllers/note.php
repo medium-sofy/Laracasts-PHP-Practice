@@ -5,7 +5,8 @@ $db = new Database($config['Database']);
 $heading = 'Note';
 
 
-$note = $db -> query('SELECT * FROM notes WHERE id= :id', ['id' => $_GET['id'],])->fetch();
+$note = $db -> query('SELECT * FROM notes WHERE id= :id', 
+['id' => $_GET['id'],])->find();
 
   if(!$note){
     abort();
