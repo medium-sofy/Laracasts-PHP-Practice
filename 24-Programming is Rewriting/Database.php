@@ -25,12 +25,12 @@ public function query($query, $params = []){
 }
 
 public function find(){
-  return $this -> statement -> fetch();
+  return $this -> statement->fetch();
 }
 
 public function findOrFail(){
 
-  $result = $this-> find();
+  $result = $this->find();
 
   if(!$result){
     abort();

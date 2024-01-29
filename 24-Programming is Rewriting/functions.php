@@ -25,3 +25,9 @@ function routeToControllers($uri,$routes){
    abort();
   }
 }
+
+function authorize($condition, $status = Response::FORBIDDEN){
+    if(! $condition){
+      abort($status);
+    }
+}
