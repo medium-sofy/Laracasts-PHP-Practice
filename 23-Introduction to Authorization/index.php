@@ -1,9 +1,10 @@
 <?php 
+require 'Response.php';
 require 'functions.php';
 require 'Database.php';
 require 'router.php';
 require ('config.php');
-require 'Response.php';
+
 
 // $id =$_GET['id'];
 
