@@ -24,6 +24,9 @@ public function query($query, $params = []){
   return $this;
 }
 
+public function findAll(){
+  return $this -> statement->fetchall();
+}
 public function find(){
   return $this -> statement->fetch();
 }
