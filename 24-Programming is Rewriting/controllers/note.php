@@ -6,11 +6,7 @@ $heading = 'Note';
 
 
 $note = $db -> query('SELECT * FROM notes WHERE id= :id', 
-['id' => $_GET['id'],])->find();
-
-  if(!$note){
-    abort();
-  }
+['id' => $_GET['id'],])->findOrFail(); 
 
   $currentUserId = 9;
 
