@@ -4,8 +4,15 @@ $db = new Database($config['Database']);
 
 $heading = 'Note';
 
-$id = $_GET['id'];
 
-$note = $db -> query('SELECT * FROM notes WHERE id=?',[$id])->fetch();
+$note = $db -> query('SELECT * FROM notes WHERE id= :id', ['id' => $_GET['id'],])->fetch();
+
+  if(!$note){
+    abort();
+  }
+
+  if($note['user_id'] !== 9){
+    abort(403);
+  }
 
 require 'views/note.view.php';
