@@ -10,6 +10,10 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
   if (strlen($_POST['body']) === 0) {
     $errors['body'] = 'Error! A body is required';
   }
+
+  if(strlen($_POST['body']) > 1000){
+    $errors['body'] = 'The body can\'t be more than 1,000 characters!';
+  }
   
   if(empty($errors))
   {
@@ -19,7 +23,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
         'user_id' => 9
       ]);
   }
-  
+
   }
 
 require 'views/note-create.view.php';
