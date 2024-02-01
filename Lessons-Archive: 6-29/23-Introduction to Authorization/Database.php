@@ -14,7 +14,7 @@ public function __construct($config){
 
 }
 
-public function query($query,$params = []){   
+public function query($query, $params = []){   
 
   $statement = $this->connection->prepare($query);
 

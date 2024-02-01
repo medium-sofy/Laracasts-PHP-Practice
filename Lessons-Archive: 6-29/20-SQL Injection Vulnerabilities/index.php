@@ -1,14 +1,14 @@
 <?php 
-require 'Response.php';
-require 'Database.php';
 require 'functions.php';
+require 'Database.php';
 require 'router.php';
-require ('config.php');
+$config = require('config.php');
 
+$db = new Database($config['Database']);
 
-// $id =$_GET['id'];
+$id =$_GET['id'];
 
-// $posts = $db->query("select * from posts where id = ?", [$id]) -> fetchall();
+$posts = $db->query("select * from posts where id = ?", [$id]) -> fetchall();
 
 //  dumpDie($posts);
 
