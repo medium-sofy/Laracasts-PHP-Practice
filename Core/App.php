@@ -1,4 +1,5 @@
 <?php
+namespace Core;
 
 class App
 {
@@ -9,10 +10,14 @@ class App
       App::$container = $container;
     }
 
-    public static function container($container)
+    public static function container()
     {
-     return App::$container = $container;
+     return App::$container;
     }
-
+    
+    public static function resolve($key)
+    {
+      return static::container()->resolve($key);
+    }
 
 }
