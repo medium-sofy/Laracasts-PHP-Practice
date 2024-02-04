@@ -1,6 +1,8 @@
 <?php
 namespace Core;
 
+use Core\Container;
+
 class App
 {
     protected static $container;
