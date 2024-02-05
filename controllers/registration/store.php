@@ -1,5 +1,11 @@
 <?php
+
+use Core\App;
 use Core\Validator;
+use Core\Database;
+
+$db = App::resolve(Database::class);
+
 $email = $_POST['email'];
 $password = $_POST['password'];
 
@@ -10,7 +16,7 @@ if(!Validator::email($email)){
 }
 
 if(!Validator::string($password, 8, 255)){
-  $errors['email'] = 'Please provide a password of at least 7 characters';
+  $errors['password'] = 'Please provide a password of at least 7 characters';
 }
 
 if(! empty($errors)){
@@ -21,5 +27,30 @@ if(! empty($errors)){
 }
 
 //check if the account already exists,
+$user = $db->query('select * from users where email = :email',[
+  'email' => $email
+])->find();
+
   //if yes, redirect to login page
-  // else, save one to the database, Log the user in, then redirect.
+if($user){
+  //someone with that emaiil already exists and has an account
+  header('Location: /');
+  exit();
+}
+else
+  { // else, save one to the database, Log the user in, then redirect.
+    $db->query('INSERT INTO users(email, password) VALUES(:email, :password)',
+    [
+      'email'=> $email,
+      'password' => $password
+    ]);
+    // work that the user has logged in
+    $_SESSION['user'] = [
+      'email' => $email
+    ];
+
+    // redirect to dashboard or homeoage,
+    header('Location: /');
+    exit();
+  }
+ 
