@@ -1,7 +1,6 @@
 <?php
-namespace Core;
 
-use Core\Container;
+namespace Core;
 
 class App
 {
