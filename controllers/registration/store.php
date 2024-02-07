@@ -45,7 +45,7 @@ else
       'password' => password_hash($password, PASSWORD_BCRYPT)
     ]);
     // work that the user has logged in
-    login($user);
+    $_SESSION['user']['email'] = $email;
     // redirect to dashboard or homeoage,
     header('Location: /');
     exit();
