@@ -50,4 +50,20 @@ function login($user)
     [
       'email' => $user['email']
     ];
+    // regenerate the session id for security purposes
+    // every time the user logs in
+    session_regenerate_id(true);
+}
+
+function logout()
+{ // Need to figure out why the cookie isn't being deleted
+
+  // empty the session
+  $_SESSION = [];
+  // delete the session file from the server
+  session_destroy();
+  // delete the cookie
+  // create a cookie and set it's timer to a value in the past
+  $params = session_get_cookie_params();
+  setcookie('PHPSESSID','',time() - 100000 ,$params['path'], $params['domain'], $params['secure'], $params['httponly']);
 }
