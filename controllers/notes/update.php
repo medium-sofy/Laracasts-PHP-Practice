@@ -6,7 +6,7 @@ use Core\App;
 
 $db = App::resolve(Database::class);
 
-$currentUserId = 9;  
+$currentUserId = 1;  
 $errors = [];
 
 $note = $db->query('select * from notes where id = :id', [
