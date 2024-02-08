@@ -1,10 +1,8 @@
 <?php
 
-// log in the user if the credentials match
-
 use Core\App;
-use Core\Validator;
 use Core\Database;
+use Http\Forms\LoginForm;
 
 $db = App::resolve(Database::class);
 
@@ -12,20 +10,13 @@ $email = $_POST['email'];
 $password = $_POST['password'];
 
 // validate form input
-$errors = [];
-if(!Validator::email($email)){
-  $errors['email'] = 'Please provide a valid email address';
-}
+$form = new LoginForm;
 
-if(!Validator::string($password)){
-  $errors['password'] = 'Please provide a valid password';
-}
-
-if(! empty($errors)){
+if(! $form->validate($email,$password)){
   return view('sessions/create.view.php',[
-    'errors' => $errors,
+    'errors' => $form->errors(),
     'email' => $email
-  ]);
+  ]);   
 }
 
 // match the credentials
@@ -51,7 +42,7 @@ if($user){
 return view('sessions/create.view.php',[
   'errors' => 
       [
-        'email' => "No matching email was found for {$email} and provided password"
+        'email' => "No match was found for {$email} and the provided password"
       ],
   'email' => $email
 ]);
